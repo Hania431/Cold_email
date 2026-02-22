@@ -8,16 +8,16 @@ from datetime import datetime
 load_dotenv()
 
 # ─── LLM Setup ────────────────────────────────────────────────────────────────
-# Option 1: Gemini (Google)
+# Option 1: OpenAI (Recommended for Streamlit Cloud)
 llm = LLM(
-      model="gemini/gemini-2.5-flash",
-     api_key=os.getenv("GEMINI_API_KEY")
- )
+    model="gpt-4o-mini",
+    api_key=os.getenv("OPENAI_API_KEY")
+)
 
-# Option 2: OpenAI
+# Option 2: Gemini (Google) - requires additional setup
 # llm = LLM(
-#     model="gpt-4o-mini",
-#     api_key=os.getenv("OPENAI_API_KEY")
+#     model="gemini/gemini-2.5-flash",
+#     api_key=os.getenv("GEMINI_API_KEY")
 # )
 
 
