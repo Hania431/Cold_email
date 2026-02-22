@@ -9,15 +9,11 @@ from datetime import datetime
 load_dotenv()
 
 # ─── LLM Setup ────────────────────────────────────────────────────────────────
-# Gemini via LiteLLM (disable native provider)
-import litellm
-litellm.drop_params = True
-
+# OpenAI (Most reliable on Streamlit Cloud)
 llm = LLM(
-    model="gemini/gemini-1.5-flash",
-    api_key=os.getenv("GEMINI_API_KEY"),
-    temperature=0.7,
-    use_native=False  # Force LiteLLM instead of native provider
+    model="gpt-4o-mini",
+    api_key=os.getenv("OPENAI_API_KEY"),
+    temperature=0.7
 )
 
 
