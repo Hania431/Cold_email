@@ -9,10 +9,10 @@ from datetime import datetime
 load_dotenv()
 
 # ─── LLM Setup ────────────────────────────────────────────────────────────────
-# OpenAI (Most reliable on Streamlit Cloud)
+# Groq (Fast, reliable, free tier available)
 llm = LLM(
-    model="gpt-4o-mini",
-    api_key=os.getenv("OPENAI_API_KEY"),
+    model="groq/llama-3.1-8b-instant",
+    api_key=os.getenv("GROQ_API_KEY"),
     temperature=0.7
 )
 
