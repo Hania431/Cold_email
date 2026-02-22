@@ -1,17 +1,18 @@
 import os
 import streamlit as st
 from crewai import Agent, Task, Crew, Process
+from crewai.llm import LLM
 from crewai_tools import ScrapeWebsiteTool
 from dotenv import load_dotenv
 from datetime import datetime
-from langchain_groq import ChatGroq
 
 load_dotenv()
 
 # ─── LLM Setup ────────────────────────────────────────────────────────────────
-# Groq via LangChain (reliable on Streamlit Cloud)
-llm = ChatGroq(
-    model="llama-3.1-8b-instant",
+# Groq via LiteLLM (reliable on Streamlit Cloud)
+# Get API key from: https://console.groq.com/keys
+llm = LLM(
+    model="groq/llama3-8b-8192",
     api_key=os.getenv("GROQ_API_KEY"),
     temperature=0.7
 )
