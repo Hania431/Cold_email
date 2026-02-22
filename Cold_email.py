@@ -9,11 +9,15 @@ from datetime import datetime
 load_dotenv()
 
 # ─── LLM Setup ────────────────────────────────────────────────────────────────
-# Gemini via LiteLLM (bypasses native provider issues)
+# Gemini via LiteLLM (disable native provider)
+import litellm
+litellm.drop_params = True
+
 llm = LLM(
     model="gemini/gemini-1.5-flash",
     api_key=os.getenv("GEMINI_API_KEY"),
-    temperature=0.7
+    temperature=0.7,
+    use_native=False  # Force LiteLLM instead of native provider
 )
 
 
