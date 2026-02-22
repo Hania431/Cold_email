@@ -9,10 +9,10 @@ load_dotenv()
 
 # ─── LLM Setup ────────────────────────────────────────────────────────────────
 # Option 1: Gemini (Google)
-# llm = LLM(
-#     model="gemini/gemini-2.5-flash",
-#     api_key=os.getenv("GEMINI_API_KEY")
-# )
+llm = LLM(
+      model="gemini/gemini-2.5-flash",
+     api_key=os.getenv("GEMINI_API_KEY")
+ )
 
 # Option 2: OpenAI
 # llm = LLM(
@@ -20,11 +20,7 @@ load_dotenv()
 #     api_key=os.getenv("OPENAI_API_KEY")
 # )
 
-# Option 3: Ollama (Local/Free)
-llm = LLM(
-    model="ollama/tinyllama",
-    base_url="http://localhost:11434"
-)
+
 
 agency_services = """
 1. SEO Optimization Service: Best for companies with good products but low traffic. We increase organic reach.
