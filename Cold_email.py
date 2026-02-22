@@ -1,6 +1,7 @@
 import os
 import streamlit as st
-from crewai import Agent, Task, Crew, Process, LLM
+from crewai import Agent, Task, Crew, Process
+from crewai.llm import LLM
 from crewai_tools import ScrapeWebsiteTool
 from dotenv import load_dotenv
 from datetime import datetime
@@ -8,17 +9,12 @@ from datetime import datetime
 load_dotenv()
 
 # ─── LLM Setup ────────────────────────────────────────────────────────────────
-# Option 1: Gemini (Google) - Using LiteLLM
+# Gemini via LiteLLM (bypasses native provider issues)
 llm = LLM(
     model="gemini/gemini-1.5-flash",
-    api_key=os.getenv("GEMINI_API_KEY")
+    api_key=os.getenv("GEMINI_API_KEY"),
+    temperature=0.7
 )
-
-# Option 2: OpenAI
-# llm = LLM(
-#     model="gpt-4o-mini",
-#     api_key=os.getenv("OPENAI_API_KEY")
-# )
 
 
 
