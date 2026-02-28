@@ -43,7 +43,7 @@ def get_homework_help(name, subject, question):
         backstory="You are an expert researcher who helps students find reliable information for their homework. You search for facts, data, and explanations from credible sources.",
         llm=llm,
         tools=[search_tool],
-        verbose=True
+        verbose=False
     )
     
     teacher = Agent(
@@ -52,7 +52,7 @@ def get_homework_help(name, subject, question):
         backstory="You are a patient and enthusiastic teacher who makes learning fun and easy. You break down complex topics into simple explanations suitable for students.",
         llm=llm,
         tools=[search_tool],
-        verbose=True
+        verbose=False
     )
     
     researcher_task = Task(
