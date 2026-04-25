@@ -363,3 +363,5 @@ if st.session_state.history:
 
 # ─── Footer ───────────────────────────────────────────────────────────────────
 st.markdown('<div class="footer">Powered by CrewAI + Streamlit</div>', unsafe_allow_html=True)
+
+# force redeploy
