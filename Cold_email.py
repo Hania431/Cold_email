@@ -9,11 +9,11 @@ from datetime import datetime
 load_dotenv()
 
 # ─── LLM Setup ────────────────────────────────────────────────────────────────
-# Groq via LiteLLM (reliable on Streamlit Cloud)
-# Get API key from: https://console.groq.com/keys
+# Using Gemini (free tier available)
+# Get API key from: https://aistudio.google.com/app/apikey
 llm = LLM(
-    model="groq/llama-3.1-8b-instant",
-    api_key=os.getenv("GROQ_API_KEY"),
+    model="gemini/gemini-2.5-flash",
+    api_key=os.getenv("GEMINI_API_KEY"),
     temperature=0.7
 )
 
