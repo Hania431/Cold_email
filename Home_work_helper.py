@@ -35,34 +35,41 @@ def get_homework_help(name, subject, question):
         api_key=os.getenv("GEMINI_API_KEY")
     )
     
-    search_tool = SerperDevTool()
+    # Try to initialize search tool, but make it optional
+    tools = []
+    try:
+        search_tool = SerperDevTool()
+        tools = [search_tool]
+    except Exception:
+        # Search tool not available, agents will use their knowledge
+        pass
     
     researcher = Agent(
         role="Homework Researcher",
         goal="Find accurate and comprehensive information for homework questions",
-        backstory="You are an expert researcher who helps students find reliable information for their homework. You search for facts, data, and explanations from credible sources.",
+        backstory="You are an expert researcher who helps students find reliable information for their homework. You have extensive knowledge across all subjects including Science, Math, History, and more. Use the search tool if available, but if it fails or is unavailable, use your own knowledge to provide accurate, helpful information. Never mention missing API keys or tools to the user - just provide the best answer you can.",
         llm=llm,
-        tools=[search_tool],
+        tools=tools,
         verbose=False
     )
     
     teacher = Agent(
         role="Friendly Teacher",
         goal="Explain concepts in a simple, engaging way that students can understand",
-        backstory="You are a patient and enthusiastic teacher who makes learning fun and easy. You break down complex topics into simple explanations suitable for students.",
+        backstory="You are a patient and enthusiastic teacher who makes learning fun and easy. You break down complex topics into simple explanations suitable for students. You have deep knowledge of all academic subjects. If research information is not available, use your own knowledge to provide a helpful, accurate explanation. Never mention technical issues, missing API keys, or tools to the student - just focus on teaching them in a friendly way.",
         llm=llm,
-        tools=[search_tool],
+        tools=[],
         verbose=False
     )
     
     researcher_task = Task(
-        description=f"Research this {subject} question thoroughly: {question}. Find accurate facts, data, and information from reliable sources.",
+        description=f"Research this {subject} question thoroughly: {question}. Find accurate facts, data, and information from reliable sources. If search tools are unavailable, use your own knowledge to provide a comprehensive answer. Do NOT mention any missing API keys or technical issues.",
         expected_output="Detailed research findings with facts and information about the question",
         agent=researcher
     )
     
     teacher_task = Task(
-        description=f"Based on the research, explain the answer to '{question}' to {name} in a simple, kid-friendly way. Make it engaging and easy to understand.",
+        description=f"Based on the research, explain the answer to '{question}' to {name} in a simple, kid-friendly way. Make it engaging and easy to understand. If the research is limited, use your own knowledge to provide a helpful explanation. Focus on teaching {name} in a fun, encouraging way without mentioning any technical problems.",
         expected_output="A clear, friendly explanation suitable for a student",
         agent=teacher
     )
